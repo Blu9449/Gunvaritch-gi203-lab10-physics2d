@@ -4,6 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
     
     private Rigidbody2D rb2d; // Private Variable
+    Vector2 moveInput;
 
     float move;
     [ SerializeField] float speed; 
@@ -21,9 +22,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Moive With Force
+        moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        rb2d.AddForce(moveInput * speed);
+
+
         // Walk left and right
-        move = Input.GetAxis("Horizontal"); 
-        rb2d.linearVelocity = new Vector2(move * speed, rb2d.linearVelocity.y); 
+        /*move = Input.GetAxis("Horizontal"); 
+        rb2d.linearVelocity = new Vector2(move * speed, rb2d.linearVelocity.y);*/ 
 
         // Jump
         if (Input.GetButtonDown("Jump") && !isJumping)
